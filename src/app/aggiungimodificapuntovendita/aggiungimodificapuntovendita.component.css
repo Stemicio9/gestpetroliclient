@@ -1,0 +1,10 @@
+.top-left-custom{
+    top:26px;
+    left:26px;
+    letter-spacing: -2px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+    margin-top: 10px;
+}

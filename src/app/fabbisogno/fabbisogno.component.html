@@ -1,0 +1,75 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Fabbisogni</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Cliente</th>
+                                    <th>Base di Carico</th>
+                                    <th>Fornitore</th>
+                                    <th>Gasolio</th>
+                                    <th>Benzina</th>
+                                    <th>Supreme</th>
+                                    <th>GPL</th>
+                                    <th>Azioni</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let fabbisogno of listafabbisogni"  class="manina">
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)">{{ fabbisogno.data | date :'dd-MM-yyyy'}}</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)">{{ fabbisogno.puntoVendita.nome }}</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)" *ngIf="fabbisogno.basedicarico !== null">{{ fabbisogno.basedicarico.nomebasedicarico }}</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)" *ngIf="fabbisogno.basedicarico === null"> Base di carico non inserita</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)" *ngIf="fabbisogno.fornitore !== null">{{ fabbisogno.fornitore.nomefornitore }}</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)" *ngIf="fabbisogno.fornitore === null"> Fornitore non inserito</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)">{{ fabbisogno.gasolio | number }}</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)">{{ fabbisogno.benzina | number }}</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)">{{ fabbisogno.supreme | number }}</td>
+                                    <td (click)="vaiapaginafabbisogno(fabbisogno)">{{ fabbisogno.gpl | number }}</td>
+                                    <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminafabbisogno(fabbisogno)">Elimina</button></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <button mat-fab class="fab-bottom-right btn btn-warning"  aria-label="Aggiungi Cliente" (click)="aggiungifabbisogno()">
+            +
+        </button>
+
+
+    </div>
+</div>

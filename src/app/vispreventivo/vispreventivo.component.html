@@ -1,0 +1,80 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Preventivi</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+
+                                <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Cliente</th>
+                                    <th>Base di Carico</th>
+                                    <th>Fornitore</th>
+                                    <th>Gasolio</th>
+                                    <th>Benzina</th>
+                                    <th>Supreme</th>
+                                    <th>GPL</th>
+                                    <th>Preventivo</th>
+
+
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let fabbisogno of listafabbisogni"  class="manina">
+                                    <td *ngIf="!fabbisogno.preventivoesistente">{{ fabbisogno.data | date :'dd-MM-yyyy'}}</td>
+                                    <td *ngIf="fabbisogno.preventivoesistente" (click)="visualizzapreventivo(fabbisogno)">{{ fabbisogno.data | date :'dd-MM-yyyy'}}</td>
+                                    <td *ngIf="!fabbisogno.preventivoesistente" >{{ fabbisogno.puntoVendita.nome }}</td>
+                                    <td *ngIf="fabbisogno.preventivoesistente" (click)="visualizzapreventivo(fabbisogno)">{{ fabbisogno.puntoVendita.nome }}</td>
+                                    <td *ngIf="!fabbisogno.preventivoesistente"  >{{ fabbisogno.basedicarico.nomebasedicarico }}</td>
+                                    <td *ngIf="fabbisogno.preventivoesistente"  (click)="visualizzapreventivo(fabbisogno)">{{ fabbisogno.basedicarico.nomebasedicarico }}</td>
+                                    <td *ngIf="!fabbisogno.preventivoesistente" >{{ fabbisogno.fornitore.nomefornitore }}</td>
+                                    <td *ngIf="fabbisogno.preventivoesistente" (click)="visualizzapreventivo(fabbisogno)">{{ fabbisogno.fornitore.nomefornitore }}</td>
+                                    <td *ngIf="!fabbisogno.preventivoesistente" >{{ fabbisogno.gasolio | number }}</td>
+                                    <td *ngIf="fabbisogno.preventivoesistente" (click)="visualizzapreventivo(fabbisogno)">{{ fabbisogno.gasolio | number }}</td>
+                                    <td *ngIf="!fabbisogno.preventivoesistente" >{{ fabbisogno.benzina | number }}</td>
+                                    <td *ngIf="fabbisogno.preventivoesistente" (click)="visualizzapreventivo(fabbisogno)">{{ fabbisogno.benzina | number }}</td>
+                                    <td *ngIf="!fabbisogno.preventivoesistente" >{{ fabbisogno.supreme | number }}</td>
+                                    <td *ngIf="fabbisogno.preventivoesistente" (click)="visualizzapreventivo(fabbisogno)">{{ fabbisogno.supreme | number }}</td>
+                                    <td *ngIf="!fabbisogno.preventivoesistente" >{{ fabbisogno.gpl | number }}</td>
+                                    <td *ngIf="fabbisogno.preventivoesistente" (click)="visualizzapreventivo(fabbisogno)">{{ fabbisogno.gpl | number }}</td>
+                                    <td (click)="visualizzapreventivo(fabbisogno)" *ngIf="fabbisogno.preventivoesistente" style="color: green"> SI </td>
+                                    <td  *ngIf="!fabbisogno.preventivoesistente" style="color: red"> NO </td>
+
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

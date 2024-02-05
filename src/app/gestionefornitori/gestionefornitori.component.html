@@ -1,0 +1,74 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Fornitori</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Inizio contratto</th>
+                                    <th>Fine contratto</th>
+                                    <th>Prezzo benzina</th>
+                                    <th>Prezzo gasolio</th>
+                                    <th>Prezzo supreme</th>
+                                    <th>Prezzo gpl</th>
+                                    <th>Azioni</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let fornitore of listafornitori" class="manina">
+                                    <td (click)="modificafornitore(fornitore)">{{ fornitore.idfornitore }}</td>
+                                    <td (click)="modificafornitore(fornitore)">{{ fornitore.nomefornitore }}</td>
+                                    <td (click)="modificafornitore(fornitore)">{{ fornitore.datainiziocontratto | date :'dd-MM-yyyy'}}</td>
+                                    <td (click)="modificafornitore(fornitore)">{{ fornitore.datafinecontratto | date :'dd-MM-yyyy'}}</td>
+                                    <td (click)="modificafornitore(fornitore)">{{ prezzogasoliodioggi(fornitore) }}</td>
+                                    <td (click)="modificafornitore(fornitore)">{{ prezzobenzinadioggi(fornitore) }}</td>
+                                    <td (click)="modificafornitore(fornitore)">{{ prezzosupremedioggi(fornitore) }}</td>
+                                    <td (click)="modificafornitore(fornitore)">{{ prezzogpldioggi(fornitore) }}</td>
+
+                                    <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminafornitore(fornitore)">Elimina</button></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <button mat-fab class="fab-bottom-right btn btn-warning" aria-label="Aggiungi Cliente" (click)="aggiungifornitore()">
+            +
+        </button>
+
+
+    </div>
+</div>

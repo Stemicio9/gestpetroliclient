@@ -1,0 +1,65 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Tutti i clienti</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Partita IVA</th>
+                                    <th>Punti Vendita</th>
+                                    <th>Azioni</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let cliente of listaclienti" class="manina">
+                                    <td (click)="vaiapaginacliente(cliente)">{{ cliente.idcliente }}</td>
+                                    <td (click)="vaiapaginacliente(cliente)">{{ cliente.nomecliente }}</td>
+                                    <td (click)="vaiapaginacliente(cliente)">{{ cliente.partitaiva }}</td>
+                                    <td (click)="vaiapaginacliente(cliente)">{{contalista(cliente.listapuntivendita)}}</td>
+                                    <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminacliente(cliente)">Elimina</button></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <button mat-fab class="fab-bottom-right btn btn-warning"  aria-label="Aggiungi Cliente" (click)="aggiungicliente()">
+            +
+        </button>
+
+
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<h3 mat-dialog-title>Aggiungi Quotazione</h3>
+
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Data</mat-label>
+        <input matInput [(ngModel)]="data.data" type="date">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo gasolio</mat-label>
+        <input matInput [(ngModel)]="data.prezzogasolio" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo benzina</mat-label>
+        <input matInput [(ngModel)]="data.prezzobenzina" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo supreme</mat-label>
+        <input matInput [(ngModel)]="data.prezzosupreme" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo GPL</mat-label>
+        <input matInput [(ngModel)]="data.prezzogpl" type="number">
+    </mat-form-field>
+
+</div>
+
+
+
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Annulla</button>
+    <button mat-button class="btn btn-rose" [mat-dialog-close]="data" cdkFocusInitial>Aggiungi</button>
+</div>

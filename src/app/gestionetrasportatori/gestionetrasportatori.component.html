@@ -1,0 +1,67 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Tutti i Trasportatori</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                 <!--   <th>ID</th>   -->
+                                    <th>Nome</th>
+                                    <th>Atk</th>
+                                    <th>Rimorchi</th>
+                                    <th>Autisti</th>
+                                    <th>Azioni</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let trasportatore of listatrasportatori" class="manina">
+                              <!--      <td (click)="vaiapaginatrasportatore(trasportatore)">{{ trasportatore.idtrasportatore }}</td>   -->
+                                    <td (click)="vaiapaginatrasportatore(trasportatore)">{{ trasportatore.nometrasportatore }}</td>
+                                    <td (click)="vaiapaginatrasportatore(trasportatore)">{{ contalista(trasportatore.listaatk) }}</td>
+                                    <td (click)="vaiapaginatrasportatore(trasportatore)">{{ contalista(trasportatore.listarimorchi) }}</td>
+                                    <td (click)="vaiapaginatrasportatore(trasportatore)">{{  contalista(trasportatore.listaautisti)}}</td>
+                                    <td><button mat-button mat-flat-button  class="btn btn-rose" (click)="eliminatrasportatore(trasportatore)">Elimina</button></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <button mat-fab class="fab-bottom-right btn btn-warning"  aria-label="Aggiungi Cliente" (click)="aggiungitrasportatore()">
+            +
+        </button>
+
+
+    </div>
+</div>

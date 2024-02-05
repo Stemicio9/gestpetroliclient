@@ -1,0 +1,17 @@
+<h3 mat-dialog-title>Aggiungi Rimorchio</h3>
+
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Targa</mat-label>
+        <input matInput [(ngModel)]="data.targa" [autofocus]="true">
+    </mat-form-field>
+
+</div>
+
+
+
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Annulla</button>
+    <button mat-button class="btn btn-rose" [mat-dialog-close]="data" cdkFocusInitial>Aggiungi</button>
+</div>

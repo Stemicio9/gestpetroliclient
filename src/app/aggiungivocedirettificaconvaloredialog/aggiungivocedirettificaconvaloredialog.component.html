@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Aggiungi voce di rettifica</h1>
+
+<div mat-dialog-content>
+
+
+    <div ngbDropdown class="d-inline-block" style="min-height: 40px;">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="valore.vocedirettifica != undefined">{{valore.vocedirettifica}}</button>
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="valore.vocedirettifica == undefined">Seleziona voce di rettifica</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem *ngFor="let val of listavalori" (click)="cambiavalore(val)">{{val.nomevoce}}</button>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <input matInput placeholder="Valore" type="number" [(ngModel)]="valore.valore" />
+
+    <br>
+    <br>
+
+
+    <input matInput placeholder="Descrizione" type="text" [(ngModel)]="valore.descrizione" />
+
+    <br>
+    <br>
+
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Annulla</button>
+    <button mat-button class="btn btn-rose" [mat-dialog-close]="data" cdkFocusInitial>Aggiungi</button>
+</div>

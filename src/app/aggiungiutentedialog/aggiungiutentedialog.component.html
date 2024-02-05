@@ -1,0 +1,42 @@
+<h3 mat-dialog-title>Aggiungi Utente</h3>
+
+
+<div mat-dialog-content>
+
+    <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="data.username" type="text">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="data.password" type="text">
+    </mat-form-field>
+
+    <div ngbDropdown class="d-inline-block" style="min-height: 100px;">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="valore != undefined">{{valore.corrispondente}}</button>
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="valore == undefined">Seleziona ruolo utente</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem *ngFor="let val of listavalori" (click)="cambiavalore(val)">{{val.corrispondente}}</button>
+        </div>
+    </div>
+
+
+    <div *ngIf="valore !== undefined && valore.valore === 2">
+        <div ngbDropdown class="d-inline-block" style="min-height: 100px;">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="clientesel != undefined">{{clientesel.nomecliente}}</button>
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="clientesel == undefined">Seleziona Cliente</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngFor="let cliente of listaclienti" (click)="clienteselezionato(cliente)">{{cliente.nomecliente}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Annulla</button>
+    <button mat-button class="btn btn-rose" [mat-dialog-close]="data" cdkFocusInitial>Aggiungi</button>
+</div>

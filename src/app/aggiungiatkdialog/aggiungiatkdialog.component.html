@@ -1,0 +1,37 @@
+<h3 mat-dialog-title>Aggiungi Atk</h3>
+
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Codice</mat-label>
+        <input matInput [(ngModel)]="data.codice" [autofocus]="true">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Targa</mat-label>
+        <input matInput [(ngModel)]="data.targa" [autofocus]="true">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="valore != undefined">
+        <mat-label>Rimorchio suggerito</mat-label>
+        <div ngbDropdown class="d-inline-block" style="height: 160px">
+            <input matInput class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle [(ngModel)]="valore.targa">
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngFor="let val of listavalori" (click)="cambiavalore(val)">{{val.targa}}</button>
+            </div>
+        </div>
+
+    </mat-form-field>
+
+    <div *ngIf="valore == undefined">
+        Non ci sono rimorchi da suggerire
+    </div>
+
+</div>
+
+
+
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Annulla</button>
+    <button mat-button class="btn btn-rose" [mat-dialog-close]="data" cdkFocusInitial>Aggiungi</button>
+</div>

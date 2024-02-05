@@ -1,0 +1,90 @@
+<button mat-fab class="top-left-custom btn btn-warning" aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+
+<div class="row">
+
+
+
+
+    <div class="col-md-12">
+
+        <div class="card">
+
+            <div class="card-header card-header-info text-center">
+                <h4 class="card-title">Prezzi Giornalieri</h4>
+
+            </div>
+
+
+            <div class="card-body">
+
+        <table datatable id="tabellaquotazioni" [dtOptions]="dtOptionsquotazioni" [dtTrigger]="dtTriggerquotazioni" class="row-border hover ">
+
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Prezzo Gasolio Self</th>
+                <th>Prezzo Benzina Self</th>
+                <th>Prezzo Supreme Self</th>
+                <th>Prezzo Gasolio</th>
+                <th>Prezzo Benzina</th>
+                <th>Prezzo Supreme</th>
+                <th>Prezzo GPL</th>
+                <th>Margini (Gasolio - Benzina - Supreme - GPL)</th>
+                <th>Azione</th>
+            </tr>
+            </thead>
+
+
+
+            <tbody>
+            <tr *ngFor="let quotazione of tableRowsquotazioni" class="manina">
+                <td><span style="display: none">{{ quotazione.data}}</span>{{ quotazione.data | date :'dd-MM-yyyy'}}</td>
+                <td (click)="modificaquotazione(quotazione)">{{ quotazione.prezzogasolioself }}</td>
+                <td (click)="modificaquotazione(quotazione)">{{ quotazione.prezzobenzinaself }}</td>
+                <td (click)="modificaquotazione(quotazione)">{{ quotazione.prezzosupremeself }}</td>
+                <td (click)="modificaquotazione(quotazione)">{{ quotazione.prezzogasolio }}</td>
+                <td (click)="modificaquotazione(quotazione)">{{ quotazione.prezzobenzina }}</td>
+                <td (click)="modificaquotazione(quotazione)">{{ quotazione.prezzosupreme }}</td>
+                <td (click)="modificaquotazione(quotazione)">{{ quotazione.prezzogpl }}</td>
+                <td (click)="modificaquotazione(quotazione)">{{ quotazione.marginecessionegasolio }}%, {{ quotazione.marginecessionebenzina }}%, {{ quotazione.marginecessionesupreme }}%, {{ quotazione.marginecessionegpl }}%,</td>
+                <td><button mat-button mat-flat-button type="button" class="btn btn-rose" (click)="eliminaquotazione(quotazione)" >Elimina</button></td>
+            </tr>
+            </tbody>
+
+
+
+        </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+        <button mat-fab class="fab-bottom-right btn btn-warning"  aria-label="Aggiungi Quotazione" (click)="aggiungiquotazione()">
+            +
+        </button>
+
+    </div>
+</div>
+
+
+

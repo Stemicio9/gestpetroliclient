@@ -1,0 +1,285 @@
+<button mat-fab class="top-left-custom btn btn-warning"  aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+
+<div *ngIf="!fabbisognoselezionato.puntoVendita.allservito" class="main-content">
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Preventivo</h4>
+
+                    </div>
+
+
+
+
+                    <div class="card-body">
+
+                        <!-- Dati del punto vendita -->    <!-- Data di consegna -->
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                {{fabbisognoselezionato.puntoVendita.nome}}
+                                <br>
+                                {{proprietario.nomecliente}}
+                            </div>
+
+                            <div class="col-md-6 text-center">
+                                Data di consegna: {{fabbisognoselezionato.data | date :'dd-MM-yyyy'}}
+                            </div>
+                        </div>
+
+                        <br> <br>
+
+
+                        <div class="row">
+
+                            <div class="col-md-11">
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <th colspan="3">PRODOTTO</th>
+                                        <th colspan="2">GASOLIO</th>
+                                        <th colspan="2">BENZINA</th>
+                                        <th colspan="2">SUPREME</th>
+                                        <th>GPL</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Modalità</td>
+                                        <td>Servito</td>
+                                        <td>Self</td>
+                                        <td>Servito</td>
+                                        <td>Self</td>
+                                        <td>Servito</td>
+                                        <td>Self</td>
+                                        <td>Servito</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Prezzo al pubblico</td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="gasolioservito"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="gasolioself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="benzinaservito"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="benzinaself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="supremeservito"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="supremeself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="gplservito"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Prezzo al pubblico Senza IVA</td>
+                                        <td>{{togliiva(gasolioservito) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(gasolioself) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(benzinaservito) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(benzinaself) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(supremeservito) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(supremeself) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(gplservito) | number:'1.3-3'}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Margine previsto per contratto</td>
+                                        <td>{{proprietario.marginegasolioservito}}</td>
+                                        <td>{{proprietario.marginegasolioself}}</td>
+                                        <td>{{proprietario.marginebenzinaservito}}</td>
+                                        <td>{{proprietario.marginebenzinaself}}</td>
+                                        <td>{{proprietario.marginesupremeservito}}</td>
+                                        <td>{{proprietario.marginesupremeself}}</td>
+                                        <td>{{proprietario.marginegplservito }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Percentuale Margine cessione senza IVA</td>
+                                        <td colspan="2"><input style="width: 75px;" placeholder="0%" type="number" [(ngModel)]="percentualegasolio"></td>
+
+                                        <td colspan="2"><input style="width: 75px;" placeholder="0%" type="number" [(ngModel)]="percentualebenzina"></td>
+
+                                        <td colspan="2"><input style="width: 75px;" placeholder="0%" type="number" [(ngModel)]="percentualesupreme"></td>
+
+                                        <td><input style="width: 75px;" placeholder="0%" type="number" [(ngModel)]="percentualegpl"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Margine cessione senza IVA</td>
+                                        <td colspan="2">{{(percentualegasolio/100)*proprietario.marginegasolioservito | number:'1.3-3'}}</td>
+
+                                        <td colspan="2">{{(percentualebenzina/100)*proprietario.marginebenzinaservito | number:'1.3-3'}}</td>
+
+                                        <td colspan="2">{{(percentualesupreme/100)*proprietario.marginesupremeservito | number:'1.3-3'}}</td>
+
+                                        <td>{{(percentualegpl/100)*proprietario.marginegplservito | number:'1.3-3'}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Prezzo in fattura</td>
+
+                                        <td colspan="2">{{prezzoinfattura(gasolioself,proprietario.marginegasolioself,percentualegasolio) | number:'1.3-3'}}</td>
+                                        <td colspan="2">{{prezzoinfattura(benzinaself,proprietario.marginebenzinaself,percentualebenzina) | number:'1.3-3'}}</td>
+                                        <td colspan="2">{{prezzoinfattura(supremeself,proprietario.marginesupremeself,percentualesupreme) | number:'1.3-3'}}</td>
+                                        <td>{{prezzoinfattura(gplservito,proprietario.marginegplservito,percentualegpl) | number:'1.3-3'}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Volume ordinato</td>
+                                        <td colspan="2">{{fabbisognoselezionato.gasolio}}</td>
+                                        <td colspan="2">{{fabbisognoselezionato.benzina}}</td>
+                                        <td colspan="2">{{fabbisognoselezionato.supreme}}</td>
+                                        <td>{{fabbisognoselezionato.gpl}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Totale ordine senza IVA</td>
+                                        <td colspan="2">{{prezzoconvolumesenzaiva(gasolioself,proprietario.marginegasolioself,percentualegasolio,fabbisognoselezionato.gasolio) | currency:'EUR'}}</td>
+                                        <td colspan="2">{{prezzoconvolumesenzaiva(benzinaself,proprietario.marginebenzinaself,percentualebenzina,fabbisognoselezionato.benzina) | currency:'EUR'}}</td>
+                                        <td colspan="2">{{prezzoconvolumesenzaiva(supremeself,proprietario.marginesupremeself,percentualesupreme,fabbisognoselezionato.supreme) | currency:'EUR'}}</td>
+                                        <td>{{prezzoconvolumesenzaiva(gplservito,proprietario.marginegplservito,percentualegpl,fabbisognoselezionato.gpl) | currency:'EUR'}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Totale ordine IVA Compresa</td>
+                                        <td colspan="2">{{prezzoconvolumesenzaiva(gasolioself,proprietario.marginegasolioself,percentualegasolio,fabbisognoselezionato.gasolio)  * 1.22 | currency:'EUR'}}</td>
+                                        <td colspan="2">{{prezzoconvolumesenzaiva(benzinaself,proprietario.marginebenzinaself,percentualebenzina,fabbisognoselezionato.benzina) * 1.22| currency:'EUR'}}</td>
+                                        <td colspan="2">{{prezzoconvolumesenzaiva(supremeself,proprietario.marginesupremeself,percentualesupreme,fabbisognoselezionato.supreme) * 1.22| currency:'EUR'}}</td>
+                                        <td>{{prezzoconvolumesenzaiva(gplservito,proprietario.marginegplservito,percentualegpl,fabbisognoselezionato.gpl) * 1.22| currency:'EUR'}}</td>
+                                    </tr>
+
+                                </table>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <br>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-4">
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Voce di rettifica</th>
+                                        <th>Valore</th>
+                                        <th>Descrizione</th>
+                                        <th>Azione</th>
+
+                                    </tr>
+                                    </thead>
+
+
+
+                                    <tbody>
+                                    <tr *ngFor="let voce of tableRows" class="manina">
+                                        <td>{{ voce.vocedirettifica }}</td>
+                                        <td>€ {{ voce.valore }}</td>
+                                        <td>{{ voce.descrizione }}</td>
+                                        <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminavocedirettifica(voce)" >Elimina</button></td>
+                                    </tr>
+                                    </tbody>
+
+
+
+                                </table>
+
+                                <br>
+
+                                <button mat-button (click)="aggiungivocedirettifica()" mat-flat-button class="btn btn-rose" type="button">Aggiungi Voce di rettifica</button>
+
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+
+
+
+                                <table datatable class="row-border hover ">
+                                    <thead></thead>
+                                    <tbody>
+                                      <tr>
+                                          <td> TOTALE FORNITURA IVA COMPRESA</td>
+                                          <td> € {{calcolatotaleconiva() | number:'1.2-2'}} </td>
+                                      </tr>
+
+                                      <tr>
+                                          <td> TOTALE VOCI DI RETTIFICA </td>
+                                          <td>  € {{calcolasommavocidirettifica() | number:'1.2-2'}}  </td>
+                                      </tr>
+                                      <tr>
+                                          <td> <b> IMPORTO BONIFICO </b>  </td>
+                                          <td> <b> € {{calcolaimportobonifico() | number:'1.2-2'}}  </b></td>
+                                      </tr>
+                                    </tbody>
+
+                                </table>
+
+
+
+
+
+                                <br>
+
+
+                                <button mat-button (click)="aggiungipreventivo()" mat-flat-button class="btn btn-rose" type="button">Aggiorna preventivo</button>
+
+                                <button mat-button (click)="stampapreventivo()" mat-flat-button class="btn btn-rose" type="button">Stampa preventivo</button>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+</div>
+
+<div *ngIf="fabbisognoselezionato.puntoVendita.allservito" class="main-content">
+    <div class="container-fluid">
+        <app-recappreventivosoloservito></app-recappreventivosoloservito>
+    </div>
+</div>
+
+

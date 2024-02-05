@@ -1,0 +1,178 @@
+<div class="container-fluid">
+
+    <div class="row">
+
+        <br>
+
+        <div class="card-body">
+
+            <div class="row">
+
+
+                <div class="col-md-3">
+
+                    <select class="custom-custom" (change)="optionSelected($event)">
+                        <option selected>Seleziona</option>
+                        <option value="1">Ultimi 7 giorni</option>
+                        <option value="2">Ultimi 30 giorni</option>
+                        <option value="3">Ultimo mese</option>
+                        <option value="4">Ultimo anno</option>
+                        <option value="5">Seleziona range</option>
+                    </select>
+
+
+                </div>
+
+
+
+
+                <div *ngIf="showDateRange" class="col-md-3">
+                    <mat-label>Inizio</mat-label>
+                    <input matInput placeholder="Data" (ngModelChange)="aggiornadata1($event)" [ngModel]="primadata  | date :'yyyy-MM-dd'" type="date">
+                </div>
+
+
+                <div *ngIf="showDateRange" class="col-md-3">
+                    <mat-label>Fine</mat-label>
+                    <input matInput placeholder="Data" (ngModelChange)="aggiornadata2($event)" [ngModel]="secondadata  | date :'yyyy-MM-dd'" type="date">
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <button mat-button mat-flat-button class="btn btn-rose" (click)="cercainrange()">Cerca</button>
+                </div>
+
+
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <button mat-button mat-flat-button class="btn btn-rose" (click)="stampaexcel()">Esporta in excel</button>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Riepilogo</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Punto Vendita</th>
+                                    <th>Gasolio</th>
+                                    <th>Benzina</th>
+                                    <th>Supreme</th>
+                                    <th>Gpl</th>
+                                    <th>Trasportatore</th>
+                                    <th>Residuo da versare</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody *ngIf="caricamento==false">
+                                <tr (click)="modificariepilogo(riepilogo)" *ngFor="let riepilogo of listariepiloghi" class="manina">
+
+                                    <td><span style="display: none">{{ riepilogo.fabbisogno.data}}</span>{{ riepilogo.fabbisogno.data | date :'dd-MM-yyyy'}}</td>
+                                    <td>{{ riepilogo.fabbisogno.puntoVendita.nome}}</td>
+                                    <td>{{ riepilogo.fabbisogno.gasolio}}</td>
+                                    <td>{{ riepilogo.fabbisogno.benzina}}</td>
+                                    <td>{{ riepilogo.fabbisogno.supreme}}</td>
+                                    <td>{{ riepilogo.fabbisogno.gpl}}</td>
+                                    <td *ngIf="riepilogo.trasporto !== undefined">{{ riepilogo.trasporto.nometrasportatore}}</td>
+                                    <td *ngIf="riepilogo.trasporto === undefined"> </td>
+                                    <td>{{riepilogo.residuodaversare | currency:'EUR'}}</td>
+                                </tr>
+                                </tbody>
+                                <tbody *ngIf="caricamento==true">
+                                   <div class="loader"></div>
+                                </tbody>
+
+
+
+                            </table>
+
+
+
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-1">
+
+
+                            </div>
+                            <div class="col-md-2">
+                               <b> Gasolio:
+                                {{totalegasolio | number}}  </b>
+                            </div>
+                            <div class="col-md-2">
+                             <b>  Benzina:
+                                {{totalebenzina | number}}  </b>
+                            </div>
+                            <div class="col-md-2">
+                               <b> Supreme:
+                                {{totalesupreme | number}}  </b>
+                            </div>
+                            <div class="col-md-1">
+                              <b>  GPL:
+                                {{totalegpl | number}}</b>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-2">
+                                <b>Residuo:
+                                    {{totaleresiduo | currency:'EUR'}} </b>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

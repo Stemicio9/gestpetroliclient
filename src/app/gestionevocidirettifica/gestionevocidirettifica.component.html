@@ -1,0 +1,64 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Voci di rettifica</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Aggiunta/Sottratta</th>
+                                    <th>Azioni</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let voce of listavocidirettifica">
+                                    <td >{{ voce.idvocedirettifica }}</td>
+                                    <td >{{ voce.nomevoce }}</td>
+                                    <td *ngIf="voce.aggiuntasottratta"> + </td>
+                                    <td *ngIf="!voce.aggiuntasottratta"> - </td>
+                                    <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminavoce(voce)">Elimina</button></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <button mat-fab class="fab-bottom-right btn btn-warning"  aria-label="Aggiungi Cliente" (click)="aggiungivocedirettifica()">
+            +
+        </button>
+
+
+    </div>
+</div>

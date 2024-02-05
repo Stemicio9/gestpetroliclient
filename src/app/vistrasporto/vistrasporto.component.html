@@ -1,0 +1,88 @@
+
+
+<mat-tab-group>
+    <mat-tab label="Lista trasporti">
+
+        <div class="main-content">
+            <div class="container-fluid">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-info text-center">
+                                <h4 class="card-title">Trasporti</h4>
+
+                            </div>
+
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+
+
+
+                                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Cliente</th>
+                                            <th>Base di Carico</th>
+                                            <th>Fornitore</th>
+                                            <th>Gasolio</th>
+                                            <th>Benzina</th>
+                                            <th>Supreme</th>
+                                            <th>GPL</th>
+                                            <th>Trasporto</th>
+
+                                        </tr>
+                                        </thead>
+
+
+
+                                        <tbody>
+                                        <tr *ngFor="let fabbisogno of listafabbisogni"  class="manina">
+                                            <td *ngIf="!fabbisogno.trasportoesistente" >{{ fabbisogno.data | date :'dd-MM-yyyy'}}</td>
+                                            <td *ngIf="fabbisogno.trasportoesistente" >{{ fabbisogno.data | date :'dd-MM-yyyy'}}</td>
+                                            <td *ngIf="!fabbisogno.trasportoesistente" >{{ fabbisogno.puntoVendita.nome }}</td>
+                                            <td *ngIf="fabbisogno.trasportoesistente" >{{ fabbisogno.puntoVendita.nome }}</td>
+                                            <td *ngIf="!fabbisogno.trasportoesistente"   >{{ fabbisogno.basedicarico.nomebasedicarico }}</td>
+                                            <td *ngIf="fabbisogno.trasportoesistente"   >{{ fabbisogno.basedicarico.nomebasedicarico }}</td>
+                                            <td *ngIf="!fabbisogno.trasportoesistente"  >{{ fabbisogno.fornitore.nomefornitore }}</td>
+                                            <td *ngIf="fabbisogno.trasportoesistente"  >{{ fabbisogno.fornitore.nomefornitore }}</td>
+                                            <td *ngIf="!fabbisogno.trasportoesistente"  >{{ fabbisogno.gasolio | number }}</td>
+                                            <td *ngIf="fabbisogno.trasportoesistente"  >{{ fabbisogno.gasolio | number }}</td>
+                                            <td *ngIf="!fabbisogno.trasportoesistente"  >{{ fabbisogno.benzina | number }}</td>
+                                            <td *ngIf="fabbisogno.trasportoesistente"  >{{ fabbisogno.benzina | number }}</td>
+                                            <td *ngIf="!fabbisogno.trasportoesistente"  >{{ fabbisogno.supreme | number}}</td>
+                                            <td *ngIf="fabbisogno.trasportoesistente"  >{{ fabbisogno.supreme | number}}</td>
+                                            <td *ngIf="!fabbisogno.trasportoesistente"  >{{ fabbisogno.gpl | number}}</td>
+                                            <td *ngIf="fabbisogno.trasportoesistente"  >{{ fabbisogno.gpl | number}}</td>
+                                            <td  *ngIf="fabbisogno.trasportoesistente" style="color: green"> SI </td>
+                                            <td   *ngIf="!fabbisogno.trasportoesistente" style="color: red"> NO </td>
+                                             </tr>
+                                        </tbody>
+
+                                    </table>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </mat-tab>
+
+    <mat-tab label="Richieste di carico">
+        <app-richiestedicarico></app-richiestedicarico>
+    </mat-tab>

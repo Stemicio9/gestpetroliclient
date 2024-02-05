@@ -1,0 +1,112 @@
+
+<button mat-fab class="top-left-custom btn btn-warning" aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Richiesta di carico</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4 text-center"><h4><b>Deposito:</b> {{basedicarico}}</h4></div>
+                            <div class="col-md-4 text-center"><h4><b>Data:</b> {{data | date :'dd-MM-yyyy'}}</h4></div>
+                            <div class="col-md-4 text-center"><h4><b>Azienda:</b> {{trasportatore}}</h4></div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-4 text-center"><h4><b>Motrice:</b> {{targamotrice}}</h4></div>
+                            <div class="col-md-4 text-center"><h4><b>Rimorchio:</b> {{targarimorchio}}</h4></div>
+                            <div class="col-md-4 text-center"><h4><b>Autista:</b> {{autista}}</h4></div>
+                        </div>
+
+
+                        <br>
+                        <br>
+
+                        <div class="row">
+
+                            <div class="col-md-1"></div>
+
+
+                            <div class="col-md-10">
+                            <div class="table-responsive">
+
+
+
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Punto vendita</th>
+                                        <th>Benzina</th>
+                                        <th>Gasolio</th>
+                                        <th>Supreme</th>
+                                        <th>Gpl</th>
+                                    </tr>
+                                    </thead>
+
+
+
+                                    <tbody>
+                                    <tr *ngFor="let trasporto of viaggio.listaviaggi">
+                                        <td>{{trasporto.fabbisogno.puntoVendita.nome}}</td>
+                                        <td>{{trasporto.fabbisogno.benzina | number}}</td>
+                                        <td>{{trasporto.fabbisogno.gasolio | number}}</td>
+                                        <td>{{trasporto.fabbisogno.supreme | number}}</td>
+                                        <td>{{trasporto.fabbisogno.gpl | number}}</td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+
+
+
+
+
+                            </div>
+
+                            </div>
+
+
+                            <div class="col-md-1"></div>
+
+                        </div>
+
+                        <br>
+
+                        <button mat-button mat-flat-button class="btn btn-rose pull-right" (click)="stampa()">Stampa</button>
+
+
+
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>

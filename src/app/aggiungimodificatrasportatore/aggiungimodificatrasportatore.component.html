@@ -1,0 +1,194 @@
+<button mat-fab class="top-left-custom btn btn-warning"   aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Scheda Trasportatore</h4>
+
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="aggiungitrasportatoreform" (ngSubmit)="aggiungitrasportatore()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nome Trasportatore" [autofocus]="true" formControlName="nometrasportatore">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+
+
+                                <div class="col-md-5">
+
+                                    <div class="text-center">
+                                        <h3>ATK</h3>
+                                    </div>
+
+
+                                    <table datatable id="tabellaatk" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                        <thead>
+                                        <tr>
+                                       <!--     <th>ID</th>     -->
+                                            <th>Codice</th>
+                                            <th>Targa</th>
+                                            <th>Suggerito</th>
+                                            <th>Azioni</th>
+                                        </tr>
+                                        </thead>
+
+
+
+                                        <tbody>
+                                        <tr *ngFor="let atk of listaatk" class="manina">
+                                        <!--    <td>{{ atk.idatk }}</td>    -->
+                                            <td>{{ atk.codice }}</td>
+                                            <td>{{ atk.targa }}</td>
+                                            <td >{{ atk.suggerito }}</td>
+                                            <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminaatk(atk)" type="button">Elimina</button></td>
+                                        </tr>
+                                        </tbody>
+
+
+
+                                    </table>
+
+                                    <br>
+
+                                    <div class="text-center">
+                                        <button mat-button (click)="aggiungiatk()" mat-flat-button class="btn btn-rose" type="button">Aggiungi ATK</button>
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div class="col-md-1"></div>
+
+                                <div class="col-md-3">
+
+                                    <div class="text-center">
+                                        <h3>Rimorchi</h3>
+                                    </div>
+
+
+                                    <table datatable id="tabellarimorchi" [dtOptions]="dtOptionsrimorchi" [dtTrigger]="dtTriggerrimorchi" class="row-border hover ">
+
+                                        <thead>
+                                        <tr>
+                                        <!--    <th>ID</th>    -->
+                                            <th>Targa</th>
+                                            <th>Azioni</th>
+                                        </tr>
+                                        </thead>
+
+
+
+                                        <tbody>
+                                        <tr *ngFor="let rimorchio of listarimorchi" class="manina">
+                                      <!--      <td>{{ rimorchio.idrimorchio }}</td>    -->
+                                            <td>{{ rimorchio.targa }}</td>
+                                            <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminarimorchio(rimorchio)" type="button">Elimina</button></td>
+                                        </tr>
+                                        </tbody>
+
+
+
+                                    </table>
+
+                                    <br>
+
+                                    <div class="text-center">
+                                        <button mat-button (click)="aggiungirimorchio()" mat-flat-button class="btn btn-rose" type="button">Aggiungi Rimorchio</button>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="col-md-3">
+
+                                    <div class="text-center">
+                                        <h3>Autisti</h3>
+                                    </div>
+
+
+                                    <table datatable id="tabellaautisti" [dtOptions]="dtOptionsautisti" [dtTrigger]="dtTriggerautisti" class="row-border hover ">
+
+                                        <thead>
+                                        <tr>
+                                         <!--   <th>ID</th>  -->
+                                            <th>Nome</th>
+                                            <th>Azioni</th>
+                                        </tr>
+                                        </thead>
+
+
+
+                                        <tbody>
+                                        <tr *ngFor="let autista of listaautisti" class="manina">
+                                          <!--  <td>{{ autista.idautista }}</td>  -->
+                                            <td>{{ autista.nomeautista }}</td>
+                                            <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminaautista(autista)" type="button">Elimina</button></td>
+                                        </tr>
+                                        </tbody>
+
+
+
+                                    </table>
+
+                                    <br>
+
+                                    <div class="text-center">
+                                        <button mat-button (click)="aggiungiautista()" mat-flat-button class="btn btn-rose" type="button">Aggiungi Autista</button>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+
+                            <button mat-raised-button type="submit" class="btn btn-rose pull-right" *ngIf="trasportatore === undefined">Crea trasportatore</button>
+                            <button mat-raised-button type="submit" class="btn btn-rose pull-right" *ngIf="trasportatore !== undefined">Aggiorna trasportatore</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

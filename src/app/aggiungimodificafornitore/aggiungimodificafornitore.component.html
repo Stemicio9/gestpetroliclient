@@ -1,0 +1,134 @@
+<button mat-fab class="top-left-custom btn btn-warning"  aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Aggiungi fornitore</h4>
+
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="aggiungifornitoreform" (ngSubmit)="aggiungifornitore()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nome fornitore" [autofocus]="true" formControlName="nomefornitore">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Inizio contratto" type="date" formControlName="datainiziocontratto">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Fine contratto" type="date" formControlName="datafinecontratto">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row align-content-center">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2">
+                                    <td><button mat-button mat-flat-button type="button" class="btn btn-rose" (click)="stampaexcel()" >Esporta quotazioni (.XSLX)</button></td>
+                                </div>
+                                <div class="col-md-5"></div>
+
+                            </div>
+
+
+
+                            <div class="row">
+
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-10">
+                                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Prezzo Gasolio</th>
+                                            <th>Prezzo Benzina</th>
+                                            <th>Prezzo Supreme</th>
+                                            <th>Prezzo GPL</th>
+                                            <th>Azione</th>
+                                        </tr>
+                                        </thead>
+
+
+
+                                        <tbody>
+                                        <tr *ngFor="let quotazione of tableRows" class="manina">
+                                            <td>{{ quotazione.data | date :'dd-MM-yyyy' }}</td>
+                                            <td>{{ quotazione.prezzogasolio }}</td>
+                                            <td>{{ quotazione.prezzobenzina }}</td>
+                                            <td>{{ quotazione.prezzosupreme }}</td>
+                                            <td>{{ quotazione.prezzogpl }}</td>
+                                            <td><button mat-button mat-flat-button type="button" class="btn btn-rose" (click)="eliminaquotazione(quotazione)" >Elimina quotazione</button></td>
+                                        </tr>
+                                        </tbody>
+
+
+
+                                    </table>
+                                </div>
+                                <div class="col-md-1">
+
+                                </div>
+                            </div>
+                            <br>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <button mat-button (click)="aggiungiquotazione()" mat-flat-button class="btn btn-rose" type="button">Aggiungi Quotazione</button>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+
+
+
+                            <button mat-raised-button type="submit" class="btn btn-rose pull-right" *ngIf="fornitore === undefined">Crea Fornitore</button>
+                            <button mat-raised-button type="submit" class="btn btn-rose pull-right" *ngIf="fornitore !== undefined">Aggiorna Fornitore</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<h3 mat-dialog-title>Aggiungi Prezzo Concorrenza</h3>
+
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Data</mat-label>
+        <input matInput [ngModel]="data.data | date:'yyyy-MM-dd'" type="date" (ngModelChange)="dataselezionatadalpicker($event)">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Nome Concorrente</mat-label>
+        <input matInput type="text"  [(ngModel)]="concorrenteselezionato" [matAutocomplete]="auto" (change)="cambiatoconcorrente()">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayconcorrente" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let val of filteredconcorrenti | async" [value]="val" >
+                {{val.nomeconcorrente}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+
+    <mat-form-field>
+        <mat-label>Prezzo gasolio</mat-label>
+        <input matInput [(ngModel)]="data.prezzogasolioservito" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo benzina</mat-label>
+        <input matInput [(ngModel)]="data.prezzobenzinaservito" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo supreme</mat-label>
+        <input matInput [(ngModel)]="data.prezzosupremeservito" type="number">
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+        <mat-label>Prezzo gasolio Self</mat-label>
+        <input matInput [(ngModel)]="data.prezzogasolioself" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo benzina Self</mat-label>
+        <input matInput [(ngModel)]="data.prezzobenzinaself" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo supreme Self</mat-label>
+        <input matInput [(ngModel)]="data.prezzosupremeself" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Prezzo GPL</mat-label>
+        <input matInput [(ngModel)]="data.prezzogpl" type="number">
+    </mat-form-field>
+
+
+
+</div>
+
+
+
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Annulla</button>
+    <button mat-button class="btn btn-rose" [mat-dialog-close]="data" cdkFocusInitial>Aggiungi</button>
+</div>

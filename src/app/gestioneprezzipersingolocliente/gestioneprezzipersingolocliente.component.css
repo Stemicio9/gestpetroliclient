@@ -1,0 +1,13 @@
+.fab-bottom-right {
+    position: fixed;
+    right: 26px;
+    bottom: 26px;
+    z-index: 100;
+}
+
+.top-left-custom{
+    top:26px;
+    left:26px;
+    letter-spacing: -2px;
+}
+

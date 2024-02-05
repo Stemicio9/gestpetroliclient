@@ -1,0 +1,73 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Tutti i punti vendita</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Codice destinazione</th>
+                                    <th>Via</th>
+                                    <th>Città</th>
+                                    <th>Provincia</th>
+                                    <th>CAP</th>
+                                    <th>Cliente</th>
+                                    <th>Azioni</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let puntovendita of listapuntivendita" class="manina">
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.idpunto }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.nome }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.codicedestinazione }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.via }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.citta }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.provincia }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.cap }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.nomecliente }}</td>
+                                    <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminapuntovendita(puntovendita)">Elimina</button></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <button mat-fab class="fab-bottom-right btn btn-warning"   aria-label="Aggiungi Punto Vendita" (click)="aggiungipuntovendita()">
+            +
+        </button>
+
+
+    </div>
+</div>

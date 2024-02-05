@@ -1,0 +1,14 @@
+.top-left-custom{
+    top:26px;
+    left:26px;
+    letter-spacing: -2px;
+}
+
+
+input{
+    border:1px solid black;
+}
+
+mat-autocomplete{
+
+}

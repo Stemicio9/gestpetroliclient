@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Seleziona voce di rettifica</h1>
+
+<div mat-dialog-content>
+
+
+
+    <li *ngFor="let val of listavalori;">
+        <label>
+            <input type="checkbox" (click)="toggleSelection(val)" [checked]="verificapresenza(val)">
+            {{val.vocedirettifica}}  {{val.descrizione}}  {{val.valore}}
+        </label>
+    </li>
+
+
+
+
+</div>
+
+
+
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Annulla</button>
+    <button mat-button class="btn btn-rose" [mat-dialog-close]="data" cdkFocusInitial>Aggiungi</button>
+</div>
+

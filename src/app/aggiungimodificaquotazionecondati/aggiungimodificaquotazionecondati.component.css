@@ -1,0 +1,12 @@
+.top-left-custom{
+    top:26px;
+    left:26px;
+    letter-spacing: -2px;
+}
+
+.fab-bottom-right {
+    position: absolute;
+    right: 26px;
+    bottom: 26px;
+    z-index: 100;
+}

@@ -1,0 +1,282 @@
+<button mat-fab class="top-left-custom btn btn-warning" aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Riepilogo</h4>
+
+                    </div>
+                    <div class="card-body">
+
+                            <div class="row">
+                                <mat-form-field class="col-md-3">
+                                    <input disabled="true" matInput placeholder="Data consegna" [ngModel]="riepilogo.fabbisogno.data | date :'yyyy-MM-dd'" type="date">
+                                </mat-form-field>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Base di carico" type="text" [ngModel]="riepilogo.fabbisogno.basedicarico.nomebasedicarico" disabled="true">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Punto vendita" type="text" [ngModel]="riepilogo.fabbisogno.puntoVendita.nome" disabled="true">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Totale volumi" type="text" [ngModel]="riepilogo.totalevolumicarburantitradizionali | number" disabled="true">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Gasolio" type="text" [ngModel]="riepilogo.fabbisogno.gasolio | number" disabled="true">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Benzina" type="text" [ngModel]="riepilogo.fabbisogno.benzina | number" disabled="true">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Supreme" type="text" [ngModel]="riepilogo.fabbisogno.supreme | number" disabled="true">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="GPL" type="text" [ngModel]="riepilogo.fabbisogno.gpl | number" disabled="true">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Cali/Eccedenze di Viaggio gasolio" type="text" [(ngModel)]="riepilogo.caligasolio ">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Cali/Eccedenze di Viaggio benzina" type="text" [(ngModel)]="riepilogo.calibenzina" >
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Cali/Eccedenze di Viaggio supreme" type="text" [(ngModel)]="riepilogo.calisupreme">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Cali/Eccedenze di Viaggio GPL" type="text" [(ngModel)]="riepilogo.caligpl" >
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Fornitore" type="text" [ngModel]="riepilogo.fabbisogno.fornitore.nomefornitore" disabled="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Vettore" type="text" [ngModel]="riepilogo.trasporto.nometrasportatore" disabled="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="DAS" type="text" [(ngModel)]="riepilogo.das">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Prezzo gasolio fornitore" type="text" [ngModel]=" prezzogasoliodioggi(riepilogo.fabbisogno.fornitore) | number" disabled="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Prezzo benzina fornitore" type="text" [ngModel]="prezzobenzinadioggi(riepilogo.fabbisogno.fornitore)| number" disabled="true" >
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Prezzo supreme fornitore" type="text" [ngModel]="prezzosupremedioggi(riepilogo.fabbisogno.fornitore) | number" disabled="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Prezzo gpl fornitore" type="text" [ngModel]="prezzogpldioggi(riepilogo.fabbisogno.fornitore) | number" disabled="true" >
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Numero fattura fornitore" type="text" [(ngModel)]="riepilogo.numerofatturafornitore">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Importo fattura fornitore" type="text" [ngModel]="riepilogo.importofatturafornitore | currency: 'EUR'" disabled="true" >
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Numero fattura Partenopea" type="text" [(ngModel)]="riepilogo.numerofatturapartenopea">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Importo fattura Partenopea" type="text" [ngModel]="riepilogo.importofattura | currency: 'EUR'" disabled="true" >
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <!--  <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Data bonifico" (ngModelChange)="aggiornadatabonifico($event)" [ngModel]="riepilogo.databonifico | date :'yyyy-MM-dd'" type="date">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Importo bonifico" type="number" [(ngModel)]="riepilogo.importobonifico" >
+                                </mat-form-field>
+                            </div>  -->
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Importo preventivo" type="text" [ngModel]="riepilogo.importopreventivo | currency: 'EUR'" disabled="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Residuo da versare" type="text" [ngModel]="riepilogo.residuodaversare | currency: 'EUR'" disabled="true" >
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+
+
+
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Importo</th>
+                                        <th>Note</th>
+                                        <th>Rimuovi</th>
+                                    </tr>
+                                    </thead>
+
+
+
+                                    <tbody>
+                                    <tr *ngFor="let bonifico of riepilogo.listabonifici">
+                                        <td>{{ bonifico.importobonifico  | currency:'EUR'}}</td>
+                                        <td>{{ bonifico.descrizione}}</td>
+                                        <td><button mat-button mat-flat-button class="btn btn-rose" (click)="rimuovibonifico(bonifico)">Rimuovi</button></td>
+                                    </tr>
+                                    </tbody>
+
+
+                                </table>
+
+
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6 text-center">
+                                <td><button mat-button mat-flat-button class="btn btn-rose" (click)="aggiungibonifico()">Aggiungi Bonifico</button></td>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+
+                            <table>
+                                <thead>
+                                <th>Nome File</th>
+                                <th>Rimuovi</th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let file of riepilogo.files">
+                                    <td role="button" (click)="aprisingolofile(file)">{{ file.name}}</td>
+                                    <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminafile(file.id)">Rimuovi</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <input type="file" value="Seleziona File" (change)="fileselezionato = $event.target.files[0]">
+                                <button mat-raised-button class="btn btn-rose pull-right" (click)="caricafile()">Aggiungi File</button>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+
+                            <button mat-raised-button class="btn btn-rose pull-right" (click)="salvariepilogo()">Salva</button>
+                            <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

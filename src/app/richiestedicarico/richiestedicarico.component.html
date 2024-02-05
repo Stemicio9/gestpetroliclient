@@ -1,0 +1,129 @@
+
+
+    <div class="container-fluid">
+<div class="row">
+
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-1"></div>
+
+                <div class="col-md-2">
+        <mat-label>Data di caricazione</mat-label>
+        <input matInput placeholder="Data" (ngModelChange)="aggiornadata($event)" [ngModel]="filter.data  | date :'yyyy-MM-dd' " type="date">
+                </div>
+                <div class="col-md-2">
+                <mat-label>Data di caricazione</mat-label>
+                <input matInput placeholder="Data" (ngModelChange)="aggiornadatafine($event)" [ngModel]="filter.datafine  | date :'yyyy-MM-dd' " type="date">
+            </div>
+
+
+                <div class="col-md-2">
+        <mat-label>Atk</mat-label>
+        <div ngbDropdown class="d-inline-block" style="height: 20px;">
+            <input autocomplete="off" *ngIf="filter.atk !== undefined" matInput class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle [(ngModel)]="filter.atk.codice">
+            <input autocomplete="off" *ngIf="filter.atk === undefined" matInput class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle [(ngModel)]="filter.atk">
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngFor="let val of listaatk" type="button" (click)="atkselezionato(val)">{{val.codice}}</button>
+            </div>
+        </div>
+                </div>
+
+
+                <div class="col-md-2">
+                <button mat-raised-button class="btn btn-warning" (click)="cancellafiltri()">Cancella Filtri</button>
+                </div>
+
+                <div class="col-md-2">
+                <button mat-raised-button class="btn btn-rose" (click)="avviaricerca()">Cerca</button>
+                </div>
+
+                <div class="col-md-1"></div>
+
+            </div>
+
+           </div>  <!-- card body -->
+
+
+       </div>
+
+
+    </div>
+
+
+
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Richieste di carico</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Atk</th>
+                                    <th>Rimorchio</th>
+                                    <th>Autista</th>
+                                    <th>Numero viaggi</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let viaggio of listaviaggi" class="manina">
+                                    <td *ngIf="viaggio.listaviaggi.length>0" (click)="recaptrasporto(viaggio)">{{ viaggio.listaviaggi[0].datadicaricazione | date : "dd/MM/yyyy" }}</td>
+                                    <td *ngIf="viaggio.listaviaggi.length>0" (click)="recaptrasporto(viaggio)">{{ viaggio.listaviaggi[0].atk?.targa}}</td>
+                                    <td *ngIf="viaggio.listaviaggi.length>0" (click)="recaptrasporto(viaggio)">{{ viaggio.listaviaggi[0].rimorchio?.targa}}</td>
+                                    <td *ngIf="viaggio.listaviaggi.length>0" (click)="recaptrasporto(viaggio)">{{ viaggio.listaviaggi[0].autista?.nomeautista }}</td>
+                                    <td *ngIf="viaggio.listaviaggi.length>0" (click)="recaptrasporto(viaggio)">{{ viaggio.listaviaggi.length }}</td>
+                                   <!-- <td><button mat-button mat-flat-button color="warn" (click)="eliminapuntovendita(puntovendita)">Elimina</button></td> -->
+
+
+                                    <td *ngIf="viaggio.listaviaggi.length==0"></td>
+                                    <td *ngIf="viaggio.listaviaggi.length==0"></td>
+                                    <td *ngIf="viaggio.listaviaggi.length==0"></td>
+                                    <td *ngIf="viaggio.listaviaggi.length==0"></td>
+                                    <td *ngIf="viaggio.listaviaggi.length==0"></td>
+
+                                </tr>
+                                </tbody>
+
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>

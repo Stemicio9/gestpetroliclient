@@ -1,0 +1,103 @@
+<button mat-fab class="top-left-custom btn btn-warning" aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Recap Fabbisogno</h4>
+
+                    </div>
+                    <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                <input matInput placeholder="Data" [ngModel]="fabbisogno.data" type="date" disabled="true">
+                                </div>
+
+                                <div class="col-md-3">
+
+
+                                    <input matInput placeholder="Fornitore" [ngModel]="fabbisogno.fornitore.nomefornitore" type="text" disabled="true">
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input matInput placeholder="Base di carico" [ngModel]="fabbisogno.basedicarico.nomebasedicarico" type="text" disabled="true">
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input matInput placeholder="Punto vendita" [ngModel]="fabbisogno.puntoVendita.nome" type="text" disabled="true">
+
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <input matInput placeholder="Gasolio" [ngModel]="fabbisogno.gasolio" type="text" disabled="true">
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input matInput placeholder="Benzina" [ngModel]="fabbisogno.benzina" type="text" disabled="true">
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input matInput placeholder="Supreme" [ngModel]="fabbisogno.supreme" type="text" disabled="true">
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input matInput placeholder="GPL" [ngModel]="fabbisogno.gpl" type="text" disabled="true">
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

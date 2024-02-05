@@ -1,0 +1,218 @@
+<button mat-fab class="top-left-custom btn btn-warning" aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Crea Trasporto</h4>
+
+                    </div>
+
+
+
+
+                    <div class="card-body">
+
+                        <!-- Dati del punto vendita -->    <!-- Data di consegna -->
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                {{fabbisognoselezionato.puntoVendita.nome}}
+                                <br>
+                                {{proprietario.nomecliente}}
+                            </div>
+
+                            <div class="col-md-6 text-center">
+                                Data di consegna: {{fabbisognoselezionato.data | date :'dd-MM-yyyy'}}
+                            </div>
+                        </div>
+
+                        <br> <br>
+
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <!--            <input
+                                              type="text"
+                                              placeholder="Seleziona trasportatore"
+                                              aria-label="Trasportatore"
+                                              matInput
+
+                                              [matAutocomplete]="auto">
+                                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)='traspsel($event.option.id)'>
+                                           <mat-option *ngFor="let trasportatore of listatrasportatori" [value]="trasportatore.nometrasportatore" [id]="trasportatore.nometrasportatore">
+                                               {{trasportatore.nometrasportatore}}
+                                           </mat-option>
+                                       </mat-autocomplete> -->
+
+
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Trasportatore</mat-label>
+                                    <input type="text" matInput [formControl]="trasportatorecontrol" [matAutocomplete]="auto1">
+                                    <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displaytrasportatore" (optionSelected)="traspsel($event)">
+                                        <mat-option *ngFor="let val of filteredtrasportatori | async" [value]="val">
+                                            {{val.nometrasportatore}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+
+                            </div>
+
+                            <div class="col-md-6 text-center" *ngIf="trasportatoreselezionato == undefined">
+                                <h4>Selezionare prima il trasportatore</h4>
+                            </div>
+
+
+
+
+                            <div  class="col-md-6 text-center" *ngIf="trasportatoreselezionato != undefined">
+
+
+
+                                <!--    <input type="text"
+                                           placeholder="Seleziona Atk"
+                                           aria-label="Atk"
+                                           matInput
+                                           [(ngModel)]="atkselezionato.targa"
+                                           [matAutocomplete]="auto2">
+                                    <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='atksel($event.option.id)'>
+                                        <mat-option #atk *ngFor="let atk of trasportatoreselezionato.listaatk" [value]="atk.codice" [id]="atk.idatk">
+                                            {{atk.codice}}
+                                        </mat-option>
+                                    </mat-autocomplete>  -->
+
+
+
+                                <div class="row">
+
+                                <div  class="col-md-6 text-center">
+
+                                <mat-form-field class="">
+                                    <mat-label>ATK</mat-label>
+                                    <input type="text" matInput [formControl]="atkcontrol" [matAutocomplete]="auto2">
+                               <!--     <p>{{atkselezionato.targa}}</p>  -->
+                                    <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayatk" (optionSelected)="atksel($event)">
+                                        <mat-option *ngFor="let val of filteredatk | async" [value]="val">
+                                            {{val.codice}}   --   {{val.targa}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+
+
+                           <!--     <input  type="text"
+                                       placeholder="Seleziona Rimorchio"
+                                       aria-label="Rimorchio"
+                                       matInput
+                                        [(ngModel)]="rimorchioselezionato.targa"
+                                       [matAutocomplete]="auto3">
+                                <mat-autocomplete #auto3="matAutocomplete" (optionSelected)='rimsel($event.option.value)'>
+                                    <mat-option #rimorchio *ngFor="let rimorchio of trasportatoreselezionato.listarimorchi" [value]="rimorchio.targa">
+                                        {{rimorchio.targa}}
+                                    </mat-option>
+                                </mat-autocomplete>  -->
+
+                                <mat-form-field class="">
+                                    <mat-label>Rimorchio</mat-label>
+                                    <input type="text" matInput [formControl]="rimorchiocontrol" [matAutocomplete]="auto3">
+                                    <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayrimorchio()" (optionSelected)="rimsel($event)">
+                                        <mat-option *ngFor="let val of filteredrimorchi | async" [value]="val">
+                                            {{val.targa}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+
+
+
+                     <!--           <input type="text"
+                                       placeholder="Seleziona Autista"
+                                       aria-label="Autista"
+                                       matInput
+                                       [(ngModel)]="autistaselezionato.nomeautista"
+                                       [matAutocomplete]="auto4">
+                                <mat-autocomplete #auto4="matAutocomplete" (optionSelected)='autsel($event.option.id)'>
+                                    <mat-option #autista *ngFor="let autista of trasportatoreselezionato.listaautisti" [value]="autista.nomeautista" [id]="autista.idautista">
+                                        {{autista.nomeautista}}
+                                    </mat-option>
+                                </mat-autocomplete>  -->
+
+                                <mat-form-field class="">
+                                    <mat-label>Autista</mat-label>
+                                    <input type="text" matInput [formControl]="autistacontrol" [matAutocomplete]="auto4">
+                                    <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayautista" (optionSelected)="autsel($event)">
+                                        <mat-option *ngFor="let val of filteredautisti | async" [value]="val">
+                                            {{val.nomeautista}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+
+                                    <mat-form-field class="">
+                                        <mat-label>Numero viaggio</mat-label>
+                                        <input type="text" matInput [(ngModel)]="identificativotrasporto">
+                                    </mat-form-field>
+
+                                </div>
+
+                                <div  class="col-md-6">
+                                    <mat-form-field class="">
+                                        <mat-label>Targa atk</mat-label>
+                                    <input disabled="true" type="text" matInput [(ngModel)]="atkselezionato.targa">
+                                    </mat-form-field>
+                                </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <br>
+                        <br>
+
+                        <div class="row align-content-center">
+                            <div class="col-md-3 text-center"></div>
+                            <div class="col-md-6 text-center">
+                                <button mat-button (click)="creatrasporto()" mat-flat-button class="btn btn-rose" type="button">Crea Trasporto</button>
+                            </div>
+                            <div class="col-md-3 text-center"></div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

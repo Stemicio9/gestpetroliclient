@@ -1,0 +1,171 @@
+<button mat-fab class="top-left-custom btn btn-warning" aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Scheda Cliente</h4>
+
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="aggiungiclienteform" (ngSubmit)="aggiungicliente()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nome cliente" [autofocus]="true" formControlName="nomecliente">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Partita IVA" type="text" formControlName="partitaiva">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Margine gasolio servito" [autofocus]="true" formControlName="marginegasolioservito">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Margine gasolio self" type="text" formControlName="marginegasolioself">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Margine benzina servito" [autofocus]="true" formControlName="marginebenzinaservito">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Margine benzina self" type="text" formControlName="marginebenzinaself">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Margine supreme servito" [autofocus]="true" formControlName="marginesupremeservito">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Margine supreme self" type="text" formControlName="marginesupremeself">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Margine GPL servito" [autofocus]="true" formControlName="marginegplservito">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Margine GPL self" type="text" formControlName="marginegplself">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6 text-center">
+                                    <h3>Punti Vendita</h3>
+                                </div>
+
+                                <div class="col-md-3"></div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-10">
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Via</th>
+                                        <th>Città</th>
+                                        <th>Provincia</th>
+                                        <th>CAP</th>
+                                        <th>Codice destinazione</th>
+                                        <th>Azioni</th>
+                                    </tr>
+                                    </thead>
+
+
+
+                                    <tbody>
+                                    <tr *ngFor="let puntovendita of tableRows" class="manina">
+                                        <td>{{ puntovendita.nome }}</td>
+                                        <td>{{ puntovendita.via }}</td>
+                                        <td>{{ puntovendita.citta }}</td>
+                                        <td>{{ puntovendita.provincia }}</td>
+                                        <td>{{ puntovendita.cap }}</td>
+                                        <td>{{ puntovendita.codicedestinazione }}</td>
+                                        <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminapuntovendita(puntovendita)" >Dissocia</button></td>
+                                    </tr>
+                                    </tbody>
+
+
+
+                                </table>
+                                </div>
+                                    <div class="col-md-1">
+
+                                    </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <button mat-button (click)="aggiungipuntovendita()" mat-flat-button class="btn btn-rose" type="button">Aggiungi Punto Vendita</button>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-rose pull-right" *ngIf="cliente === undefined">Crea cliente</button>
+                            <button mat-raised-button type="submit" class="btn btn-rose pull-right" *ngIf="cliente !== undefined">Aggiorna cliente</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

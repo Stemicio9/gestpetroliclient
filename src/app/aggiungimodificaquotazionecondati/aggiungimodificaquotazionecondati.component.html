@@ -1,0 +1,350 @@
+<button mat-fab class="top-left-custom btn btn-warning"  aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<!-- <div *ngIf="!gestioneprezzi.puntovenditaselezionato.puntovendita.allservito" class="main-content">-->
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Gestione Prezzi</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                {{gestioneprezzi.puntovenditaselezionato.puntovendita.nome}}
+                                <br>
+                                {{gestioneprezzi.puntovenditaselezionato.nomecliente}}
+                            </div>
+
+                            <div >
+                                <input type="date" [ngModel]="quotazioneselezionata.data | date:'yyyy-MM-dd'" (ngModelChange)="dataselezionatadalpicker($event)">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <mat-form-field class="col-md-6 text-center">
+                                <mat-label>Fornitore</mat-label>
+                                <input type="text" matInput [formControl]="fornitorecontrol" [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayfornitore" (optionSelected)="fornitoresel($event)">
+                                    <mat-option *ngFor="let val of filteredfornitori | async" [value]="val">
+                                        {{val.nomefornitore}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <th colspan="3"></th>
+                                        <th colspan="2">GASOLIO</th>
+                                        <th colspan="2">BENZINA</th>
+                                        <th colspan="2">SUPREME</th>
+                                        <th>GPL</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Prezzo al pubblico Senza IVA</td>
+                                        <td colspan="2">{{quotazionefornitore?.prezzogasolio}}</td>
+
+                                        <td colspan="2">{{quotazionefornitore?.prezzobenzina}}</td>
+
+                                        <td colspan="2">{{quotazionefornitore?.prezzosupreme}}</td>
+
+                                        <td colspan="2">{{quotazionefornitore?.prezzogpl}}</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-11">
+                                <table style="width: 100%;">
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <th colspan="3">PRODOTTO</th>
+                                        <th colspan="2">GASOLIO</th>
+                                        <th colspan="2">BENZINA</th>
+                                        <th colspan="2">SUPREME</th>
+                                        <th>GPL</th>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Modalità</td>
+                                        <td>Servito</td>
+                                        <td>Self</td>
+                                        <td>Servito</td>
+                                        <td>Self</td>
+                                        <td>Servito</td>
+                                        <td>Self</td>
+                                        <td>Servito</td>
+
+                                    </tr>
+
+
+
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Volumi di vendita</td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.volumegasolioservito"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.volumegasolioself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.volumebenzinaservito"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.volumebenzinaself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.volumesupremeservito"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.volumesupremeself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.volumegpl"></td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Prezzo al pubblico proposto</td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.prezzogasolio"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.prezzogasolioself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.prezzobenzina"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.prezzobenzinaself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.prezzosupreme"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.prezzosupremeself"></td>
+                                        <td><input style="width: 75px;" placeholder="0.000" type="number" lang="en_EN" step='0.01' [(ngModel)]="quotazioneselezionata.prezzogpl"></td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Prezzo al pubblico Senza IVA</td>
+                                        <td>{{togliiva(quotazioneselezionata.prezzogasolio) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(quotazioneselezionata.prezzogasolioself) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(quotazioneselezionata.prezzobenzina) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(quotazioneselezionata.prezzobenzinaself) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(quotazioneselezionata.prezzosupreme) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(quotazioneselezionata.prezzosupremeself) | number:'1.3-3'}}</td>
+                                        <td>{{togliiva(quotazioneselezionata.prezzogpl) | number:'1.3-3'}}</td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Margine previsto per contratto</td>
+                                        <td>{{proprietario?.marginegasolioservito}}</td>
+                                        <td>{{proprietario?.marginegasolioself}}</td>
+                                        <td>{{proprietario?.marginebenzinaservito}}</td>
+                                        <td>{{proprietario?.marginebenzinaself}}</td>
+                                        <td>{{proprietario?.marginesupremeservito}}</td>
+                                        <td>{{proprietario?.marginesupremeself}}</td>
+                                        <td>{{proprietario?.marginegplservito }}</td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Percentuale Margine Self</td>
+                                        <td colspan="2"><input style="width: 75px;" placeholder="0%" type="number" [(ngModel)]="quotazioneselezionata.marginecessionegasolio"></td>
+
+                                        <td colspan="2"><input style="width: 75px;" placeholder="0%" type="number" [(ngModel)]="quotazioneselezionata.marginecessionebenzina"></td>
+
+                                        <td colspan="2"><input style="width: 75px;" placeholder="0%" type="number" [(ngModel)]="quotazioneselezionata.marginecessionesupreme"></td>
+
+                                        <td><input style="width: 75px;" placeholder="0%" type="number" [(ngModel)]="quotazioneselezionata.marginecessionegpl"></td>
+                                    </tr>
+
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Prezzo in fattura gestore</td>
+                                        <td colspan="2">{{prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzogasolioself),proprietario.marginegasolioself,quotazioneselezionata.marginecessionegasolio) | number:'1.3-3'}}</td>
+
+                                        <td colspan="2">{{prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzobenzinaself),proprietario.marginebenzinaself,quotazioneselezionata.marginecessionebenzina) | number:'1.3-3'}}</td>
+
+                                        <td colspan="2">{{prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzosupremeself),proprietario.marginesupremeself,quotazioneselezionata.marginecessionesupreme) | number:'1.3-3'}}</td>
+
+                                        <td >{{prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzogplself),proprietario.marginegplself,quotazioneselezionata.marginecessionegpl) | number:'1.3-3'}}</td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Importo da riconoscere al Gestore</td>
+                                        <td>{{importodaricooscerealgestoreservito(proprietario.marginegasolioservito, proprietario.marginegasolioself,quotazioneselezionata.marginecessionegasolio) | number:'1.3-3'}}</td>
+                                        <td>{{importodaricooscerealgestoreself(proprietario.marginegasolioself,quotazioneselezionata.marginecessionegasolio) | number:'1.3-3'}}</td>
+                                        <td>{{importodaricooscerealgestoreservito(proprietario.marginebenzinaservito, proprietario.marginebenzinaself,quotazioneselezionata.marginecessionebenzina) | number:'1.3-3'}}</td>
+                                        <td>{{importodaricooscerealgestoreself(proprietario.marginebenzinaself,quotazioneselezionata.marginecessionebenzina) | number:'1.3-3'}}</td>
+                                        <td>{{importodaricooscerealgestoreservito(proprietario.marginesupremeservito, proprietario.marginesupremeself,quotazioneselezionata.marginecessionesupreme) | number:'1.3-3'}}</td>
+                                        <td>{{importodaricooscerealgestoreself(proprietario.marginesupremeself,quotazioneselezionata.marginecessionesupreme) | number:'1.3-3'}}</td>
+                                        <td>{{importodaricooscerealgestoreservito(proprietario.marginegplservito, proprietario.marginegplservito,quotazioneselezionata.marginecessionegpl) | number:'1.3-3'}}</td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Conguaglio da effettuare</td>
+                                        <td>{{conguagliodaeffettuare(togliiva(quotazioneselezionata.prezzogasolio), proprietario.marginegasolioservito, prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzogasolioself),proprietario.marginegasolioself,quotazioneselezionata.marginecessionegasolio)) | number:'1.3-3'}}</td>
+                                        <td>{{conguagliodaeffettuare(togliiva(quotazioneselezionata.prezzogasolioself), proprietario.marginegasolioself, prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzogasolioself),proprietario.marginegasolioself,quotazioneselezionata.marginecessionegasolio)) | number:'1.3-3'}}</td>
+                                        <td>{{conguagliodaeffettuare(togliiva(quotazioneselezionata.prezzobenzina), proprietario.marginebenzinaservito, prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzobenzinaself),proprietario.marginebenzinaself,quotazioneselezionata.marginecessionebenzina)) | number:'1.3-3'}}</td>
+                                        <td>{{conguagliodaeffettuare(togliiva(quotazioneselezionata.prezzobenzinaself), proprietario.marginebenzinaself, prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzobenzinaself),proprietario.marginebenzinaself,quotazioneselezionata.marginecessionebenzina)) | number:'1.3-3'}}</td>
+                                        <td>{{conguagliodaeffettuare(togliiva(quotazioneselezionata.prezzosupreme), proprietario.marginesupremeservito, prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzosupremeself),proprietario.marginesupremeself,quotazioneselezionata.marginecessionesupreme)) | number:'1.3-3'}}</td>
+                                        <td>{{conguagliodaeffettuare(togliiva(quotazioneselezionata.prezzosupremeself), proprietario.marginesupremeself, prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzosupremeself),proprietario.marginesupremeself,quotazioneselezionata.marginecessionesupreme)) | number:'1.3-3'}}</td>
+                                        <td>{{conguagliodaeffettuare(togliiva(quotazioneselezionata.prezzogpl), proprietario.marginegplservito, prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzogplself),proprietario.marginegplself,quotazioneselezionata.marginecessionegpl)) | number:'1.3-3'}}</td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Quotazione</td>
+                                        <td>{{quotazionefornitore?.prezzogasolio}}</td>
+                                        <td>{{quotazionefornitore?.prezzogasolio}}</td>
+                                        <td>{{quotazionefornitore?.prezzobenzina}}</td>
+                                        <td>{{quotazionefornitore?.prezzobenzina}}</td>
+                                        <td>{{quotazionefornitore?.prezzosupreme}}</td>
+                                        <td>{{quotazionefornitore?.prezzosupreme}}</td>
+                                        <td>{{quotazionefornitore?.prezzogpl}}</td>
+                                    </tr>
+
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Trasporto</td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.trasportogasolioservito" (keyup)="modificatrasportogasolioservito($event)"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.trasportogasolioself"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.trasportobenzinaservito"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.trasportobenzinaself"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.trasportosupremeservito"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.trasportosupremeservito"></td>
+
+                                        <td><input style="width: 75px;" placeholder="" type="number" [(ngModel)]="quotazioneselezionata.trasportogpl"></td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Altro Costo</td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.altrocostogasolioservito" (keyup)="modificaaltrocostogasolioservito($event)"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.altrocostogasolioself"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.altrocostobenzinaservito"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.altrocostobenzinaself"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.altrocostosupremeservito"></td>
+                                        <td ><input style="width: 75px;" placeholder="0" type="number" [(ngModel)]="quotazioneselezionata.altrocostosupremeservito"></td>
+
+                                        <td><input style="width: 75px;" placeholder="" type="number" [(ngModel)]="quotazioneselezionata.altrocostogpl"></td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3"><b>Margine Partenopea</b></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">Finale</td>
+                                        <td>{{marginefinale(togliiva(quotazioneselezionata.prezzogasolio), proprietario.marginegasolioservito, quotazioneselezionata.marginecessionegasolio, quotazionefornitore?.prezzogasolio, quotazioneselezionata.trasportogasolioservito, quotazioneselezionata.altrocostogasolioservito)  | number:'1.4-4'}}</td>
+                                        <td>{{marginefinale(togliiva(quotazioneselezionata.prezzogasolioself), proprietario.marginegasolioself, quotazioneselezionata.marginecessionegasolio, quotazionefornitore?.prezzogasolio, quotazioneselezionata.trasportogasolioself, quotazioneselezionata.altrocostogasolioself)  | number:'1.4-4'}}</td>
+                                        <td>{{marginefinale(togliiva(quotazioneselezionata.prezzobenzina), proprietario.marginebenzinaservito, quotazioneselezionata.marginecessionebenzina, quotazionefornitore?.prezzobenzina, quotazioneselezionata.trasportobenzinaservito, quotazioneselezionata.altrocostobenzinaservito)  | number:'1.4-4'}}</td>
+                                        <td>{{marginefinale(togliiva(quotazioneselezionata.prezzobenzinaself), proprietario.marginebenzinaself,quotazioneselezionata.marginecessionebenzina,  quotazionefornitore?.prezzobenzina, quotazioneselezionata.trasportobenzinaself, quotazioneselezionata.altrocostobenzinaself)  | number:'1.4-4'}}</td>
+                                        <td>{{marginefinale(togliiva(quotazioneselezionata.prezzosupreme), proprietario.marginesupremeservito,quotazioneselezionata.marginecessionesupreme ,quotazionefornitore?.prezzosupreme, quotazioneselezionata.trasportosupremeservito, quotazioneselezionata.altrocostosupremeservito)  | number:'1.4-4'}}</td>
+                                        <td>{{marginefinale(togliiva(quotazioneselezionata.prezzosupremeself), proprietario.marginesupremeself,quotazioneselezionata.marginecessionesupreme, quotazionefornitore?.prezzosupreme, quotazioneselezionata.trasportosupremeself, quotazioneselezionata.altrocostosupremeself)  | number:'1.4-4'}}</td>
+                                        <td>{{marginefinale(togliiva(quotazioneselezionata.prezzogpl), proprietario.marginegplservito,quotazioneselezionata.marginecessionegpl ,quotazionefornitore?.prezzogpl, quotazioneselezionata.trasportogpl, quotazioneselezionata.altrocostogpl)  | number:'1.4-4'}}</td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black;">
+                                        <td colspan="3">In Fattura</td>
+                                        <td colspan="2">{{prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzogasolioself),proprietario.marginegasolioself,quotazioneselezionata.marginecessionegasolio) - quotazionefornitore?.prezzogasolio - quotazioneselezionata.trasportogasolioservito/1000 | number:'1.3-3'}}</td>
+
+                                        <td colspan="2">{{prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzobenzinaself),proprietario.marginebenzinaself,quotazioneselezionata.marginecessionebenzina) - quotazionefornitore?.prezzobenzina- quotazioneselezionata.trasportobenzinaservito/1000 | number:'1.3-3'}}</td>
+
+                                        <td colspan="2">{{prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzosupremeself),proprietario.marginesupremeself,quotazioneselezionata.marginecessionesupreme) - quotazionefornitore?.prezzosupreme- quotazioneselezionata.trasportosupremeservito/1000 | number:'1.3-3'}}</td>
+
+                                        <td>{{prezzoinfatturagestore(togliiva(quotazioneselezionata.prezzogplself),proprietario.marginegplself,quotazioneselezionata.marginecessionegpl) -quotazionefornitore?.prezzogpl- quotazioneselezionata.trasportogpl/1000 | number:'1.3-3'}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3">Medio</td>
+                                        <td colspan="2">{{marginemedio(quotazioneselezionata.volumegasolioservito, quotazioneselezionata.volumegasolioself, marginefinale(togliiva(quotazioneselezionata.prezzogasolio), proprietario.marginegasolioservito, quotazioneselezionata.marginecessionegasolio,quotazionefornitore?.prezzogasolio, quotazioneselezionata.trasportogasolioservito, quotazioneselezionata.altrocostogasolioservito), marginefinale(togliiva(quotazioneselezionata.prezzogasolioself), proprietario.marginegasolioself, quotazioneselezionata.marginecessionegasolio,quotazionefornitore?.prezzogasolio, quotazioneselezionata.trasportogasolioself, quotazioneselezionata.altrocostogasolioself)) | number:'1.3-3'}}</td>
+
+                                        <td colspan="2">{{marginemedio(quotazioneselezionata.volumebenzinaservito,quotazioneselezionata.volumebenzinaself,marginefinale(togliiva(quotazioneselezionata.prezzobenzina), proprietario.marginebenzinaservito, quotazioneselezionata.marginecessionebenzina,quotazionefornitore?.prezzobenzina ,quotazioneselezionata.trasportobenzinaservito, quotazioneselezionata.altrocostobenzinaservito), marginefinale(togliiva(quotazioneselezionata.prezzobenzinaself), proprietario.marginebenzinaself, quotazioneselezionata.marginecessionebenzina,quotazionefornitore?.prezzobenzina, quotazioneselezionata.trasportobenzinaself, quotazioneselezionata.altrocostobenzinaself)) | number:'1.3-3'}}</td>
+
+                                        <td colspan="2">{{marginemedio(quotazioneselezionata.volumesupremeservito,quotazioneselezionata.volumesupremeself,marginefinale(togliiva(quotazioneselezionata.prezzosupreme), proprietario.marginesupremeservito, quotazioneselezionata.marginecessionesupreme,quotazionefornitore?.prezzosupreme, quotazioneselezionata.trasportosupremeservito, quotazioneselezionata.altrocostosupremeservito), marginefinale(togliiva(quotazioneselezionata.prezzosupremeself), proprietario.marginesupremeself, quotazioneselezionata.marginecessionesupreme,quotazionefornitore?.prezzosupreme, quotazioneselezionata.trasportosupremeself, quotazioneselezionata.altrocostosupremeself)) | number:'1.3-3'}}</td>
+
+                                        <td>{{marginemedio(quotazioneselezionata.volumegpl,0,marginefinale(togliiva(quotazioneselezionata.prezzogpl), proprietario.marginegplservito, quotazioneselezionata.marginecessionegpl,quotazionefornitore?.prezzogpl, quotazioneselezionata.trasportogpl, quotazioneselezionata.altrocostogpl),0) | number:'1.3-3'}}</td>
+                                    </tr>
+
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row text-center">
+                            <div class="col-md-10 text-center">
+                                <button mat-button (click)="salvaquotazione()" mat-flat-button class="btn btn-rose" type="button">Salva</button>
+                            </div>
+                        </div>
+
+
+                        <div class="row text-center">
+                            <h3>Prezzi concorrenza</h3>
+                            <div class="table-responsive col-md-11">
+
+
+
+                                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Data</th>
+                                        <th>Gasolio servito</th>
+                                        <th>Gasolio self</th>
+
+                                        <th>Benzina servito</th>
+                                        <th>Benzina self</th>
+                                        <th>Supreme servito</th>
+                                        <th>Benzina self</th>
+
+                                        <th>GPL</th>
+
+                                        <th>RIMUOVI</th>
+
+                                    </tr>
+                                    </thead>
+
+
+
+                                    <tbody>
+                                    <tr *ngFor="let prezzoconcorrente of prezziconcorrenti" class="manina">
+                                        <td>{{ prezzoconcorrente?.concorrente?.nomeconcorrente}}</td>
+                                        <td>{{ prezzoconcorrente?.data | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{ prezzoconcorrente?.prezzogasolioservito }}</td>
+                                        <td>{{ prezzoconcorrente?.prezzogasolioself }}</td>
+                                        <td>{{ prezzoconcorrente?.prezzobenzinaservito }}</td>
+                                        <td>{{ prezzoconcorrente?.prezzobenzinaself }}</td>
+                                        <td>{{ prezzoconcorrente?.prezzosupremeservito }}</td>
+                                        <td>{{ prezzoconcorrente?.prezzosupremeself }}</td>
+                                        <td>{{ prezzoconcorrente?.prezzogpl }}</td>
+                                        <td><button mat-button mat-flat-button class="btn btn-rose" (click)="eliminaprezzoconcorrente(prezzoconcorrente)">Elimina</button></td>
+
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+
+
+
+
+
+                            </div>
+
+                            <button mat-fab class="fab-bottom-right btn btn-warning"  aria-label="Aggiungi Prezzo Concorrenza" (click)="aggiungiprezzoconcorrente()">
+                                +
+                            </button>
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

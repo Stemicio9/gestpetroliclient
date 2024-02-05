@@ -1,0 +1,104 @@
+
+
+<mat-tab-group>
+    <mat-tab label="Aggiungi nuovo">
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Crea trasporto</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+
+                                <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Cliente</th>
+                                    <th>Base di Carico</th>
+                                    <th>Fornitore</th>
+                                    <th>Gasolio</th>
+                                    <th>Benzina</th>
+                                    <th>Supreme</th>
+                                    <th>GPL</th>
+                                    <th>Trasporto</th>
+                                    <th>Azioni</th>
+                                    <th>Rimuovi Trasporto</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let fabbisogno of listafabbisogni"  class="manina">
+                                    <td *ngIf="!fabbisogno.trasportoesistente" (click)="creatrasporto(fabbisogno)">{{ fabbisogno.data | date :'dd-MM-yyyy'}}</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente" (click)="visualizzatrasporto(fabbisogno)">{{ fabbisogno.data | date :'dd-MM-yyyy' }}</td>
+                                    <td *ngIf="!fabbisogno.trasportoesistente" (click)="creatrasporto(fabbisogno)">{{ fabbisogno.puntoVendita.nome }}</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente" (click)="visualizzatrasporto(fabbisogno)">{{ fabbisogno.puntoVendita.nome }}</td>
+
+
+                                    <td *ngIf="!fabbisogno.trasportoesistente && fabbisogno.basedicarico !== null"  (click)="creatrasporto(fabbisogno)">{{ fabbisogno.basedicarico.nomebasedicarico }}</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente && fabbisogno.basedicarico !== null"  (click)="visualizzatrasporto(fabbisogno)">{{ fabbisogno.basedicarico.nomebasedicarico }}</td>
+                                    <td *ngIf="!fabbisogno.trasportoesistente && fabbisogno.basedicarico === null"  (click)="creatrasporto(fabbisogno)">Base di carico non inserita</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente && fabbisogno.basedicarico === null"  (click)="visualizzatrasporto(fabbisogno)">Base di carico non inserita</td>
+
+
+                                    <td *ngIf="!fabbisogno.trasportoesistente && fabbisogno.fornitore !== null" (click)="creatrasporto(fabbisogno)">{{ fabbisogno.fornitore.nomefornitore }}</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente && fabbisogno.fornitore !== null" (click)="visualizzatrasporto(fabbisogno)">{{ fabbisogno.fornitore.nomefornitore }}</td>
+                                    <td *ngIf="!fabbisogno.trasportoesistente && fabbisogno.fornitore === null" (click)="creatrasporto(fabbisogno)">Fornitore non inserito</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente && fabbisogno.fornitore === null" (click)="visualizzatrasporto(fabbisogno)">Fornitore non inserito</td>
+
+
+
+                                    <td *ngIf="!fabbisogno.trasportoesistente" (click)="creatrasporto(fabbisogno)">{{ fabbisogno.gasolio | number }}</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente" (click)="visualizzatrasporto(fabbisogno)">{{ fabbisogno.gasolio | number }}</td>
+                                    <td *ngIf="!fabbisogno.trasportoesistente" (click)="creatrasporto(fabbisogno)">{{ fabbisogno.benzina | number }}</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente" (click)="visualizzatrasporto(fabbisogno)">{{ fabbisogno.benzina | number }}</td>
+                                    <td *ngIf="!fabbisogno.trasportoesistente" (click)="creatrasporto(fabbisogno)">{{ fabbisogno.supreme | number}}</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente" (click)="visualizzatrasporto(fabbisogno)">{{ fabbisogno.supreme | number}}</td>
+                                    <td *ngIf="!fabbisogno.trasportoesistente" (click)="creatrasporto(fabbisogno)">{{ fabbisogno.gpl | number}}</td>
+                                    <td *ngIf="fabbisogno.trasportoesistente" (click)="visualizzatrasporto(fabbisogno)">{{ fabbisogno.gpl | number}}</td>
+                                    <td (click)="visualizzatrasporto(fabbisogno)" *ngIf="fabbisogno.trasportoesistente" style="color: green"> SI </td>
+                                    <td (click)="creatrasporto(fabbisogno)" *ngIf="!fabbisogno.trasportoesistente" style="color: red"> NO </td>
+                                    <td><button mat-button mat-flat-button class="btn btn-rose" *ngIf="fabbisogno.trasportoesistente" (click)="visualizzatrasporto(fabbisogno)">Visualizza</button>
+                                        <button mat-button mat-flat-button class="btn btn-rose" *ngIf="!fabbisogno.trasportoesistente" (click)="creatrasporto(fabbisogno)">Crea</button>
+                                    </td>
+                                    <td><button mat-button mat-flat-button class="btn btn-warning" (click)="rimuovitrasporto(fabbisogno)">Rimuovi</button></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+    </mat-tab>
+
+    <mat-tab label="Richieste di carico">
+        <app-richiestedicarico></app-richiestedicarico>
+    </mat-tab>

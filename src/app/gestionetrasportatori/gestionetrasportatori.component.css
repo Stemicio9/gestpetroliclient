@@ -1,0 +1,6 @@
+.fab-bottom-right {
+    position: fixed;
+    right: 26px;
+    bottom: 26px;
+    z-index: 100;
+}

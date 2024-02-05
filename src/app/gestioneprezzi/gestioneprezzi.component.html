@@ -1,0 +1,62 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Gestione prezzi dei punti vendita</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Codice destinazione</th>
+
+                                    <th>Cliente</th>
+
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr *ngFor="let puntovendita of listapuntivendita" class="manina">
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.idpunto }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.nome }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.puntovendita.codicedestinazione }}</td>
+                                    <td (click)="vaiapaginapuntovendita(puntovendita)">{{ puntovendita.nomecliente }}</td>
+
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</div>

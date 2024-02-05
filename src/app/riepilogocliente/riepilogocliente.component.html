@@ -1,0 +1,128 @@
+
+
+<div class="container-fluid">
+
+
+
+    <div class="row">
+
+        <br>
+
+        <div class="card-body">
+
+      <!--      <div class="row">
+
+
+                <div class="col-md-1"></div>
+
+                <div class="col-md-4">
+                    <mat-label>Inizio</mat-label>
+                    <input matInput placeholder="Data" (ngModelChange)="aggiornadata1($event)" [ngModel]="primadata  | date :'yyyy-MM-dd'" type="date">
+                </div>
+
+
+                <div class="col-md-4">
+                    <mat-label>Fine</mat-label>
+                    <input matInput placeholder="Data" (ngModelChange)="aggiornadata2($event)" [ngModel]="secondadata  | date :'yyyy-MM-dd'" type="date">
+                </div>
+
+                <div class="col-md-2">
+                    <button mat-button mat-flat-button class="btn btn-rose" (click)="cercainrange()">Cerca</button>
+                </div>
+
+                <div class="col-md-1"></div>
+
+            </div> -->
+
+            <br>
+
+       <!--     <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <button mat-button mat-flat-button class="btn btn-rose" (click)="stampaexcel()">Esporta in excel</button>
+                </div>
+                <div class="col-md-5"></div>
+            </div> -->
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Riepilogo</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+
+
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Punto Vendita</th>
+                                    <th>Gasolio</th>
+                                    <th>Benzina</th>
+                                    <th>Supreme</th>
+                                    <th>Gpl</th>
+                                    <th>Trasportatore</th>
+                                    <th>Residuo da versare</th>
+                                </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                <tr (click)="vaiariepilogoclientesingola(riepilogo)" *ngFor="let riepilogo of listariepiloghi" class="manina">
+
+                                    <td>{{ riepilogo.fabbisogno.data | date :'dd-MM-yyyy'}}</td>
+                                    <td>{{ riepilogo.fabbisogno.puntoVendita.nome}}</td>
+                                    <td>{{ riepilogo.fabbisogno.gasolio}}</td>
+                                    <td>{{ riepilogo.fabbisogno.benzina}}</td>
+                                    <td>{{ riepilogo.fabbisogno.supreme}}</td>
+                                    <td>{{ riepilogo.fabbisogno.gpl}}</td>
+                                    <td *ngIf="riepilogo.trasporto !== undefined">{{ riepilogo.trasporto.nometrasportatore}}</td>
+                                    <td *ngIf="riepilogo.trasporto === undefined"> </td>
+                                    <td>{{riepilogo.residuodaversare | currency:'EUR'}}</td>
+                                </tr>
+                                </tbody>
+
+
+                            </table>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

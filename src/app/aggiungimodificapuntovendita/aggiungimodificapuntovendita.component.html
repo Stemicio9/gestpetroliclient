@@ -1,0 +1,236 @@
+<button mat-fab class="top-left-custom btn btn-warning"  aria-label="Torna indietro" (click)="tornaindietro()">
+    <-----------
+</button>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info text-center">
+                        <h4 class="card-title">Scheda Punto Vendita</h4>
+
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="aggiungipuntovenditaform" (ngSubmit)="aggiungipuntovendita()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nome" [autofocus]="true" formControlName="nome">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Via" type="text" formControlName="via">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Città" [autofocus]="true" formControlName="citta">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Provincia" type="text" formControlName="provincia">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="CAP" [autofocus]="true" formControlName="cap">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Codice destinazione" type="text" formControlName="codicedestinazione">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Email" [autofocus]="true" formControlName="email">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+
+                                        <mat-radio-group aria-label="All servito" formControlName="allservito">
+                                            <mat-radio-button [value]="1">Solo servito</mat-radio-button>
+                                            <mat-radio-button [value]="2">Misto</mat-radio-button>
+                                            <mat-radio-button [value]="3">Gestione diretta</mat-radio-button>
+                                        </mat-radio-group>
+
+
+                                </div>
+                            </div>
+
+
+                            <br>
+                            <h3 style="text-align: center">Voci di rettifica</h3>
+
+                            <div class="row">
+
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-10">
+                                    <table datatable id="tabellavoci" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover ">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Voce di rettifica</th>
+                                            <th>Valore</th>
+                                            <th>Descrizione</th>
+                                            <th>Azione</th>
+
+                                        </tr>
+                                        </thead>
+
+
+
+                                        <tbody>
+                                        <tr *ngFor="let voce of tableRows" class="manina">
+                                            <td>{{ voce.vocedirettifica }}</td>
+                                            <td>{{ voce.valore }}</td>
+                                            <td>{{ voce.descrizione }}</td>
+                                            <td><button mat-button mat-flat-button type="button"  class="btn btn-rose" (click)="eliminavocedirettifica(voce)" >Dissocia</button></td>
+                                        </tr>
+                                        </tbody>
+
+
+
+                                    </table>
+                                </div>
+
+
+                                <div class="col-md-1">
+
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-10 text-center">
+                                    <button mat-button (click)="aggiungivocedirettifica()" mat-flat-button class="btn btn-rose" type="button">Aggiungi Voce di rettifica</button>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <h3 style="text-align: center">Prezzi giornalieri</h3>
+
+                            <div class="row">
+
+
+
+                                <div class="col-md-12">
+                                    <table datatable id="tabellaquotazioni" [dtOptions]="dtOptionsquotazioni" [dtTrigger]="dtTriggerquotazioni" class="row-border hover ">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Prezzo Gasolio Self</th>
+                                            <th>Prezzo Benzina Self</th>
+                                            <th>Prezzo Supreme Self</th>
+                                            <th>Prezzo Gasolio</th>
+                                            <th>Prezzo Benzina</th>
+                                            <th>Prezzo Supreme</th>
+                                            <th>Prezzo GPL</th>
+                                            <th>Margini (Gasolio - Benzina - Supreme - GPL)</th>
+                                            <th>Azione</th>
+                                        </tr>
+                                        </thead>
+
+
+
+                                        <tbody>
+                                        <tr *ngFor="let quotazione of tableRowsquotazioni" class="manina">
+                                            <td>{{ quotazione.data | date :'dd-MM-yyyy' }}</td>
+                                            <td>{{ quotazione.prezzogasolioself }}</td>
+                                            <td>{{ quotazione.prezzobenzinaself }}</td>
+                                            <td>{{ quotazione.prezzosupremeself }}</td>
+                                            <td>{{ quotazione.prezzogasolio }}</td>
+                                            <td>{{ quotazione.prezzobenzina }}</td>
+                                            <td>{{ quotazione.prezzosupreme }}</td>
+                                            <td>{{ quotazione.prezzogpl }}</td>
+                                            <td>{{ quotazione.marginecessionegasolio }}%, {{ quotazione.marginecessionebenzina }}%, {{ quotazione.marginecessionesupreme }}%, {{ quotazione.marginecessionegpl }}%,</td>
+                                            <td><button mat-button mat-flat-button type="button" class="btn btn-rose" (click)="eliminaquotazione(quotazione)" >Elimina</button></td>
+                                        </tr>
+                                        </tbody>
+
+
+
+                                    </table>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-10 text-center">
+                                    <button mat-button (click)="aggiungiquotazione()" mat-flat-button class="btn btn-rose" type="button">Aggiungi Prezzo</button>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+
+
+
+
+
+                            <button mat-raised-button type="submit" class="btn btn-rose pull-right" *ngIf="puntovendita === undefined">Crea Punto Vendita</button>
+                            <button mat-raised-button type="submit" class="btn btn-rose pull-right" *ngIf="puntovendita !== undefined">Aggiorna Punto Vendita</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

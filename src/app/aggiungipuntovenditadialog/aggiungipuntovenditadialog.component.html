@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Aggiungi punto vendita</h1>
+
+
+
+<mat-tab-group>
+    <mat-tab label="Aggiungi nuovo">
+<div mat-dialog-content>
+
+    <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="data.nome" [autofocus]="true">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Via</mat-label>
+        <input matInput [(ngModel)]="data.via">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Codice destinazione</mat-label>
+        <input matInput [(ngModel)]="data.codicedestinazione">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Città</mat-label>
+        <input matInput [(ngModel)]="data.citta">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Provincia</mat-label>
+        <input matInput [(ngModel)]="data.provincia">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>CAP</mat-label>
+        <input matInput [(ngModel)]="data.cap">
+    </mat-form-field>
+
+</div>
+    </mat-tab>
+
+    <mat-tab label="Associa esistente">
+        <div ngbDropdown class="d-inline-block" style="min-height: 200px;">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="valore != undefined">{{valore.nome}}</button>
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="valore == undefined">Seleziona punto vendita</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem *ngFor="let val of listavalori" (click)="cambiavalore(val)">{{val.nome}}</button>
+        </div>
+        </div>
+    </mat-tab>
+
+</mat-tab-group>
+
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Annulla</button>
+    <button mat-button class="btn btn-rose" [mat-dialog-close]="data" cdkFocusInitial>Aggiungi</button>
+</div>
